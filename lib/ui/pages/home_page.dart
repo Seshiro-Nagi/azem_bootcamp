@@ -32,6 +32,26 @@ class _HomePageState extends State<HomePage> {
           ),
           TextButton(
             onPressed: () async {
+              if (dummyCategories.isEmpty) {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text('No Categories:'),
+                    content: Text(
+                      'You can\'t add products with no Categories, Go add some categories.',
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text('Ok'),
+                      ),
+                    ],
+                  ),
+                );
+                return;
+              }
               final result = await Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -40,6 +60,7 @@ class _HomePageState extends State<HomePage> {
               );
               if (result is CategoryModel) {
                 setState(() {
+                  print(result);
                   dummyCategories.add(result);
                 });
                 // ignore: use_build_context_synchronously

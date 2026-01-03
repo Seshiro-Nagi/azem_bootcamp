@@ -25,6 +25,7 @@ class _AddEditPageState extends State<AddEditPage> {
     void saveProduct() {
       if (!_formKey.currentState!.validate()) return;
       if (widget.isProduct) {
+        
         final name = nameController.text.trim();
         final description = descriptionController.text.trim();
         final price = double.tryParse(priceController.text) ?? 0.0;
